@@ -6,6 +6,7 @@ dotenv.config();
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const app = express();
 app.set('view engine','ejs')
+app.set('views',"./views")
 const port = 5000;
 
 const db = new pg.Client({
@@ -17,8 +18,6 @@ const db = new pg.Client({
   ssl:true
 });
 db.connect();
-
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
