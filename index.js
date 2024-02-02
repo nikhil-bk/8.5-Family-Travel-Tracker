@@ -52,7 +52,7 @@ app.get("/", async (req, res) => {
   // console.log(countries)
   const currentUser = await getCurrentUser();
   // console.log(currentUser)
-  res.render("index.ejs", {
+  res.render("index", {
     countries: countries,
     total: countries.length,
     users: users,
@@ -87,7 +87,7 @@ app.post("/add", async (req, res) => {
 
 app.post("/user", async (req, res) => {
   if (req.body.add === "new") {
-    res.render("new.ejs");
+    res.render("new");
   } else {
     currentUserId = req.body.user;
     res.redirect("/");
