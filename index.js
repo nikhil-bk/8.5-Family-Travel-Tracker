@@ -12,7 +12,8 @@ const db = new pg.Client({
   host: PGHOST,
   database: PGDATABASE,
   password: PGPASSWORD,
-  port: 5432,ssl:true
+  port: 5432,
+  ssl:true
 });
 db.connect();
 
