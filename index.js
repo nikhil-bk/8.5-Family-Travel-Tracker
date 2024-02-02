@@ -84,10 +84,26 @@ app.post("/add", async (req, res) => {
       );
       res.redirect("/");
     } catch (err) {
-      console.log(err);
+      console.log("catch error",err);
+      const countries = await checkVisisted();
+      res.render("index", {
+        countries: countries,
+        total: countries.length,
+        users:users,
+        color: currentUser.color,
+        error: "Country has already been added, try again.",
+      });
     }
   } catch (err) {
-    console.log(err);
+    console.log("catch error",err);
+    const countries = await checkVisisted();
+    res.render("index", {
+      countries: countries,
+      total: countries.length,
+      users:users,
+      color: currentUser.color,
+      error: "Country name does not exist, try again.",
+    });
   }
 });
 
