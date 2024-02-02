@@ -3,11 +3,14 @@ import bodyParser from "body-parser";
 import pg from "pg";
 import dotenv from 'dotenv';
 import path, { dirname } from "path"
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 dotenv.config();
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const app = express();
-app.set('views',dirname("/views"))
+app.set('views',__dirname+"/views")
 app.set('view engine','ejs')
 
 const port = 5000;
@@ -23,7 +26,7 @@ const db = new pg.Client({
 db.connect();
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(dirname("/public")));
+app.use(express.static(__dirname+"/public"));
 
 let currentUserId = 1;
 
@@ -113,5 +116,6 @@ app.post("/new", async (req, res) => {
 });
 
 app.listen(port, () => {
+  console.log(__dirname)
   console.log(`Server running on http://localhost:${port}`);
 });
