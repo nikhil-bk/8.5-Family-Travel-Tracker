@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 const app = express();
+app.set('view engine','ejs')
 const port = 5000;
 
 const db = new pg.Client({
@@ -17,8 +18,8 @@ const db = new pg.Client({
 });
 db.connect();
 
-app.set('views', './views');
-app.set('view engine','ejs')
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
